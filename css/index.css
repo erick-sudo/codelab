@@ -9,20 +9,7 @@ html{
     box-sizing: border-box;
     color: white;
 }
-.workspaces {
-    background-color: transparent;
-    min-width: 100px;
-    height: max-content;
-    width: max-content;
 
-    border-radius: 5px;
-
-    box-shadow: 0.4em 0.4em 0em #695e62;
-    border: solid 1px #695e62;
-
-    margin-right: 0.8em;
-    margin-top: 0.8em;
-}
 #nav-bar{
     display: flex;
     
@@ -194,17 +181,6 @@ textarea{
     color: #f5aac6;
 }
 
-.notes {
-    border: solid 1px #695e62;
-    margin-top: 2em;
-    padding: 2em;
-    border-radius: 10px;
-    text-align: center;
-}
-.notes h3 {
-    color: #e287b4;
-    
-}
 body{
     border: solid 1px #695e62;
     padding: 5px;
@@ -259,5 +235,16 @@ body{
     border: none;
     color: rgb(90, 247, 28);
     font-weight: bolder;
+    
+}
+
+.notes {
+    border: solid 1px #695e62;
+    margin-top: 2em;
+    padding: 2em;
+    border-radius: 10px;
+}
+.notes h3 {
+    color: #e287b4;
     
 }

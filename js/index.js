@@ -29,7 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     document.querySelector(".run-code").addEventListener('click', event => {
-        document.querySelector("#terminal0").style.display = "block"
+        let term = document.querySelector("#terminal0")
+        term.style.display = "block"
+        term.scrollIntoView(true)
     })
 
     document.querySelector("#repo-form").addEventListener('submit', event => {
@@ -60,7 +62,6 @@ document.querySelector("#cancel").addEventListener('click', event => {
 
 function initTerminalDimensions(terminal){
     terminal.style.height = (innerHeight * 0.8)+"px"
-    terminal.style.width = (innerWidth * 0.7)+"px"
 }
 
 function maximizeTerminal(event) {
@@ -69,6 +70,14 @@ function maximizeTerminal(event) {
     terminal.style.right = 0
     terminal.style.top = "2px"
     terminal.style.bottom = "2px"
+}
+
+function minimizeTerminal(event) {
+    let terminal = document.getElementById("terminal0")
+    terminal.style.left = "10em"
+    terminal.style.right = "10em"
+    terminal.style.top = "5em"
+    terminal.style.bottom = "5em"
 }
 
 function dragTerminal(event) {

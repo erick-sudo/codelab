@@ -219,10 +219,12 @@ body{
     border: solid 1px rgba(255, 0, 0, 0.507);
     border-radius: 5px;
     padding: 1em;
-    background-color: rgba(4, 10, 24, 0.664);
+    background-color: rgba(5, 13, 32, 0.932);
 
-    position: absolute;
+    position: fixed;
     top: 5em;
+    left: 2em;
+    right: 2em;
 }
 #commands::-webkit-scrollbar{
     background-color: transparent;
@@ -247,6 +249,7 @@ body{
 .enter-commands{
     margin-top: 10px;
     display: flex;
+    
 }
 .enter-commands span{
     width: max-content;

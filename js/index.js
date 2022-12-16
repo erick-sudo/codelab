@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleMode(1)
     })
 
-    
+    initTerminalDimensions(document.querySelector("#commands"))
     
 })
 
@@ -58,10 +58,10 @@ document.querySelector("#cancel").addEventListener('click', event => {
     document.querySelector("#hidden-form").style.display = "none"
 })
 
-function initTerminalDimensions(){
-    document.querySelector("#commands").style.height = (innerHeight * 0.8)+"px"
-    document.querySelector("#commands").style.width = (innerWidth * 0.5)+"px"
-    document.querySelector("#commands").style.left = (innerHeight * 0.8)+"px"
+function initTerminalDimensions(terminal){
+    terminal.style.height = (innerHeight * 0.8)+"px"
+    terminal.style.width = (innerWidth * 0.7)+"px"
+
 }
 
 function dragTerminal(event) {

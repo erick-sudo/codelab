@@ -34,6 +34,12 @@ html{
 hr{
     border-color: #695e62;
 }
+
+#nav-bar h1{
+    color: rgba(19, 6, 6, 0.685);
+    text-shadow: 0.04em 0.04em 0.04em white;
+    text-align: center;
+}
 #nav-bar div{
     
     width: 30%;
@@ -195,6 +201,7 @@ textarea{
 }
 
 body{
+    margin: 5px;
     border: solid 1px #695e62;
     padding: 5px;
     border-radius: 5px;
@@ -215,10 +222,7 @@ body{
     background-color: rgba(4, 10, 24, 0.664);
 
     position: absolute;
-    
     top: 5em;
-    left: 50%;
-    transform: translateX(-50%);
 }
 #commands::-webkit-scrollbar{
     background-color: transparent;

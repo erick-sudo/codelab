@@ -61,7 +61,14 @@ document.querySelector("#cancel").addEventListener('click', event => {
 function initTerminalDimensions(terminal){
     terminal.style.height = (innerHeight * 0.8)+"px"
     terminal.style.width = (innerWidth * 0.7)+"px"
+}
 
+function maximizeTerminal(event) {
+    let terminal = document.getElementById("terminal0")
+    terminal.style.left = 0
+    terminal.style.right = 0
+    terminal.style.top = "2px"
+    terminal.style.bottom = "2px"
 }
 
 function dragTerminal(event) {

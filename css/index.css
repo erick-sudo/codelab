@@ -9,7 +9,20 @@ html{
     box-sizing: border-box;
     color: white;
 }
+.workspaces {
+    background-color: transparent;
+    min-width: 100px;
+    height: max-content;
+    width: max-content;
 
+    border-radius: 5px;
+
+    box-shadow: 0.4em 0.4em 0em #695e62;
+    border: solid 1px #695e62;
+
+    margin-right: 0.8em;
+    margin-top: 0.8em;
+}
 #nav-bar{
     display: flex;
     

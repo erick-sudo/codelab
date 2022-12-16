@@ -34,11 +34,31 @@
     </div>
     <hr>
     <div id="main">
+        <section id="terminal0" class="terminals">
+            <div class="top-bar">
+                <div class="title-bar">
+                    <span class="terminal"> ~ Untitled</span>
+                </div>
+                <div class="manage-workspace">
+                    <button onclick="hideTerminal()" class="controlls"><img src="./assets/icons/tabcontrols/icons8-macos-close-30.png"></button>
+                    <button class="maximize" class="controlls"><img src="./assets/icons/tabcontrols/icons8-macos-maximize-30.png"></button>
+                    <button class="minimize" class="controlls"><img src="./assets/icons/tabcontrols/icons8-macos-minimize-30.png"></button>
+                    
+                </div>
+            </div>
+            <div id="commands">
+                <div class="enter-commands">
+                    <span>$ ></span>
+                    <input type="text" class="input-commands" autofocus>
+                </div>
+            </div>
+    </section>
         <section id="workspace0" class="workspaces">
                 <div class="top-bar">
                     <div class="title-bar">
                         <span class="heading">Code-Challenge</span>
                         <button class="clone">Clone Repo</button>
+                        <button class="commit">Commit Changes</button>
                         <button class="run-code">Run</button>
                     </div>
                     <div class="manage-workspace">

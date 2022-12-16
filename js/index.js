@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
         createWorkspace(workspaces)
     })
 
+    document.querySelector(".input-commands").addEventListener("keydown", event => {
+        if(event.key === "Enter") {
+            event.target.setAttribute("readonly", "true")
+            document.getElementById("commands").appendChild(createCommandSession())
+        }
+    })
 
     document.querySelector(".close").addEventListener('click', event => {
         event.target.closest("div").closest("div").closest("section").remove()
@@ -20,6 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
         activeSpaceId = update(event)
         
         document.querySelector("#hidden-form").style.display = "block"
+    })
+
+    document.querySelector(".run-code").addEventListener('click', event => {
+        document.querySelector("#terminal0").style.display = "block"
     })
 
     document.querySelector("#repo-form").addEventListener('submit', event => {
@@ -38,6 +48,10 @@ document.querySelector("#cancel").addEventListener('click', event => {
     document.querySelector("#hidden-form").style.display = "none"
 })
 
+function hideTerminal() {
+    alert("Erick")
+    document.getElementById("terminal0").style.display = "none"
+}
 function toggleMode(mode) {
     if(mode) {
         document.querySelector("html").style.backgroundColor = "black"
@@ -117,6 +131,27 @@ function toggleMode(mode) {
     }
 }
 
+function createCommandSession() {
+    let enterCommands = document.createElement("div")
+    enterCommands.classList.add("enter-commands")
+    let span = document.createElement("span")
+    span.textContent = "$ >"
+    let inputCommand = document.createElement("input")
+    inputCommand.setAttribute("type", "text")
+    inputCommand.setAttribute("class", "input-commands")
+
+    inputCommand.addEventListener("keydown", event => {
+        if(event.key === "Enter") {
+            event.target.setAttribute("readonly", "true")
+            document.getElementById("commands").appendChild(createCommandSession())
+        }
+    })
+
+    enterCommands.append(span, inputCommand)
+
+    return enterCommands
+}
+
 function populateWorkSpace(username, reponame) {
     
     let url  = `https://api.github.com/repos/${username}/${reponame}/contents`
@@ -190,6 +225,8 @@ function createWorkspace(workspaces){
     let heading = document.createElement("span")
     heading.textContent = "Code Challenge"
     heading.classList.add("heading")
+
+    //Clone Button
     let clone = document.createElement("button")
     clone.classList.add("clone")
     clone.textContent = "Clone Repo"
@@ -198,10 +235,22 @@ function createWorkspace(workspaces){
         
         document.querySelector("#hidden-form").style.display = "block"
     })
+
+    //Commit button
+    let commit = document.createElement("button")
+    commit.classList.add("commit")
+    commit.textContent = "Commit Changes"
+
+    //Run code
     let run = document.createElement("button")
     run.classList.add("run-code")
     run.textContent = "Run"
-    titleBar.append(heading, clone, run)
+    run.addEventListener('click', event => {
+        document.querySelector("#terminal0").style.display = "block"
+    })
+
+    //Add code controls
+    titleBar.append(heading, clone, commit, run)
 
     let files = document.createElement("div")
     files.classList.add("files")

@@ -50,6 +50,10 @@ hr{
     font-weight: bolder;
     border-radius: 0.5em;
 }
+.commit{
+    background-color: transparent;
+    color: #695e62;
+}
 
 .clone{
     background-color: transparent;
@@ -184,7 +188,7 @@ button{
     text-shadow: 0.05em 0.05em 0em rgb(7, 14, 1);
 }
 textarea{
-    font-size: 1.5em;
+    font-size: 1.1em;
     font-weight: bolder;
     color: #f5aac6;
 }
@@ -211,4 +215,37 @@ body{
 
 #foot h5{
     font-size: 1.3em;
+}
+
+#terminal0 {
+    display: none;
+    border: solid 1px red;
+    border-radius: 2px;
+    padding: 1em;
+    background-color: black;
+
+    position: absolute;
+}
+.terminal {
+    color: white;
+}
+
+#commands{
+    min-height: 400px;
+    min-width: 500px;
+
+    border-top: solid 1px white;
+}
+.enter-commands{
+    margin-top: 10px;
+    display: flex;
+}
+.enter-commands span{
+    width: 10%;
+}
+.input-commands{
+    background-color: transparent;
+    width: 90%;
+    outline: none;
+    border: none;
 }

@@ -42,15 +42,22 @@ document.addEventListener('DOMContentLoaded', () => {
         event.target.reset()
     })
 
+    document.querySelector("#dark-mode").addEventListener('click', event => {
+        toggleMode(0)
+    })
+
+    document.querySelector("#bright-mode").addEventListener('click', event => {
+        toggleMode(1)
+    })
+
 })
 
 document.querySelector("#cancel").addEventListener('click', event => {
     document.querySelector("#hidden-form").style.display = "none"
 })
 
-function hideTerminal() {
-    alert("Erick")
-    document.getElementById("terminal0").style.display = "none"
+function hideTerminal(event) {
+    document.getElementById("terminal0").style.backgroundColor = "orange"
 }
 function toggleMode(mode) {
     if(mode) {

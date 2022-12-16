@@ -1,0 +1,74 @@
+#hidden-form{
+    display: none;
+    position: absolute;
+    width: 80%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto auto;
+}
+#form{
+    z-index: 10;
+    padding: 1.2em;
+    border-radius: 10px;
+    box-shadow: 0.04em 0.04em 0.4em rgb(243, 252, 243);
+    background-color: rgba(7, 0, 0, 0.932);
+    color: white;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 20%;
+}
+#cancel {
+    margin-top: 2em;
+}
+#form h1{
+    color: rgba(19, 6, 6, 0.685);
+    text-shadow: 0.04em 0.04em 0.04em white;
+    text-align: center;
+}
+
+#form form{
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+}
+
+#form form input {
+    display: block;
+    margin-top: 1em;
+}
+#form input[type="text"] {
+    outline: none;
+    background-color: transparent;
+    border: solid 1px white;
+    padding: 0.4em;
+    border-radius: 0.3em;
+    text-align: center;
+    color: tomato;
+    font-weight: bolder;
+    font-size: 1em;
+}
+#get{
+    background-color: green;
+    border: none;
+    font-weight: bolder;
+    padding: 0.4em 2em;
+    border-radius: 0.4em;
+}
+#cancel{
+    background-color: rgb(128, 30, 0);
+    border: none;
+    font-weight: bolder;
+    padding: 0.4em 2em;
+    border-radius: 0.4em;
+}
+#cancel:hover , #get:hover{
+    box-shadow: 0.04em 0.04em 0.4em white;
+    transform: scale(1.3);
+}

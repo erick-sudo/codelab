@@ -1,0 +1,214 @@
+html{
+    background-color: rgb(190, 173, 173);
+    font-family: monospace;
+
+    /**/
+    background-color: #0c0a0b;
+}
+*{
+    box-sizing: border-box;
+    color: white;
+}
+.workspaces {
+    background-color: transparent;
+    min-width: 100px;
+    height: max-content;
+    width: max-content;
+
+    border-radius: 5px;
+
+    box-shadow: 0.4em 0.4em 0em #695e62;
+    border: solid 1px #695e62;
+
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+}
+#nav-bar{
+    display: flex;
+    
+    justify-content: space-evenly;
+}
+#nav-bar div h2 {
+    color: white;
+}
+hr{
+    border-color: #695e62;
+}
+#nav-bar div{
+    
+    width: 30%;
+    align-items: center;
+
+    display: flex;
+    justify-content: center;
+}
+#add-workspace{
+    background-color: transparent;
+    border: solid 1px #695e62;
+    padding: 5px;
+    color: white;
+    font-weight: bolder;
+    border-radius: 0.5em;
+}
+
+.clone{
+    background-color: transparent;
+    color: #695e62;
+}
+.run-code{
+    background-color: transparent;
+    color: #695e62;
+}
+
+.space{
+    width: 100%;
+}
+.top-bar{
+    display: flex;
+    padding: 2px;
+    margin-bottom: 5px;
+}
+
+.title-bar{
+    width: 90%;
+    font-weight: bolder;
+    display: flex;
+}
+.title-bar > button {
+    padding: 0.3em 0.6em;
+    border: none;
+    box-shadow: 0.04em 0.04em 0em;
+    border-radius: 3px;
+    font-weight: bolder;
+    margin-left: 5%;
+}
+.heading{
+    font-size: 1.3em;
+}
+.files{
+    display: flex;
+    overflow-x: scroll;
+    padding-left: 0.5em;
+    width: 100%;
+}
+.open-files{
+    color: white;
+    font-weight: bolder;
+    border-top-right-radius: 0.4em;
+    border-top-left-radius: 0.4em;
+    padding: 0.2em 0.5em;
+    margin-right: 2px;
+
+    white-space: nowrap;
+    margin-bottom: 2px;
+    
+}
+.files::-webkit-scrollbar{
+    height: 3px;
+}
+.files::-webkit-scrollbar-thumb{
+    height: 3px;
+    background-color: #310613;
+    border-radius: 10px;
+}
+.manage-workspace{
+    position: relative;
+    justify-content: right;
+    width: 15%;
+    
+}
+.manage-workspace button {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+
+    float: right;
+}
+.manage-workspace button img {
+    border: none;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+
+}
+textarea{
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    border-top: solid 1px #695e62;
+    padding: 1em;
+}
+
+textarea::-webkit-scrollbar{
+    width: 5px;
+}
+textarea::-webkit-scrollbar-thumb{
+    background-color: orangered;
+    border-radius: 5px;
+}
+
+
+textarea:focus{
+    outline: 0;
+    height: 100%;
+}
+#main{
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+}
+img{
+    vertical-align: middle;
+}
+
+button{
+    cursor: pointer;
+}
+
+.clicked-tab {
+    background-color: rgb(247, 206, 206);
+    color: black;
+    box-shadow: 0.04em 0.04em 0.04em,
+                -0.04em -0.04em 0.04em;
+}
+.unclicked-tab {
+    background-color: transparent;
+    border: solid 1px #695e62;
+}
+
+.heading{
+    color: rgb(247, 206, 206);
+    text-shadow: 0.05em 0.05em 0em rgb(7, 14, 1);
+}
+textarea{
+    font-size: 1.5em;
+    font-weight: bolder;
+    color: #f5aac6;
+}
+
+.notes {
+    border: solid 1px #695e62;
+    margin-top: 2em;
+    padding: 2em;
+    border-radius: 10px;
+    text-align: center;
+}
+.notes h3 {
+    color: #e287b4;
+    
+}
+body{
+    border: solid 1px #695e62;
+    padding: 5px;
+    border-radius: 5px;
+}
+#foot{
+    text-align: center;
+}
+
+#foot h5{
+    font-size: 1.3em;
+}

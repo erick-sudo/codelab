@@ -57,7 +57,13 @@ document.querySelector("#cancel").addEventListener('click', event => {
 })
 
 function hideTerminal(event) {
-    document.getElementById("terminal0").style.backgroundColor = "orange"
+    let terminal = document.getElementById("terminal0")
+    terminal.style.display = "none"
+    
+}
+
+function randomColor() {
+    return `rgba(${(Math.random()*100)%255},${(Math.random()*100)%255},${(Math.random()*100)%255}, .5`
 }
 function toggleMode(mode) {
     if(mode) {
@@ -299,8 +305,8 @@ function createWorkspace(workspaces){
 
     //Create a TextArea
     let textarea = document.createElement("textarea")
-    textarea.cols = "50"
-    textarea.rows = "10"
+    textarea.cols = "60"
+    textarea.rows = "20"
     textarea.classList.add("space")
     textarea.autocomplete = "on"
     textarea.id = `textarea${workspaces.length}`

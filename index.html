@@ -9,6 +9,25 @@
     <link rel="stylesheet" href="./css/form.css">
 </head>
 <body>
+    <section id="terminal0" class="terminals" draggable="true">
+        <div class="top-bar">
+            <div class="title-bar">
+                <span class="terminal"> ~ Untitled</span>
+            </div>
+            <div class="manage-workspace">
+                <button onclick="hideTerminal(event)" class="controlls"><img src="./assets/icons/tabcontrols/icons8-macos-close-30.png"></button>
+                <button class="maximize" class="controlls"><img src="./assets/icons/tabcontrols/icons8-macos-maximize-30.png"></button>
+                <button class="minimize" class="controlls"><img src="./assets/icons/tabcontrols/icons8-macos-minimize-30.png"></button>
+                
+            </div>
+        </div>
+        <div id="commands">
+            <div class="enter-commands">
+                <span>$ ></span>
+                <input type="text" class="input-commands" autofocus>
+            </div>
+        </div>
+</section>
     <div id="hidden-form">
         <div id="form">
             <h1>Bring a Github Repository to your Workspace</h1>
@@ -34,25 +53,6 @@
     </div>
     <hr>
     <div id="main">
-        <section id="terminal0" class="terminals">
-            <div class="top-bar">
-                <div class="title-bar">
-                    <span class="terminal"> ~ Untitled</span>
-                </div>
-                <div class="manage-workspace">
-                    <button onclick="hideTerminal(event)" class="controlls"><img src="./assets/icons/tabcontrols/icons8-macos-close-30.png"></button>
-                    <button class="maximize" class="controlls"><img src="./assets/icons/tabcontrols/icons8-macos-maximize-30.png"></button>
-                    <button class="minimize" class="controlls"><img src="./assets/icons/tabcontrols/icons8-macos-minimize-30.png"></button>
-                    
-                </div>
-            </div>
-            <div id="commands">
-                <div class="enter-commands">
-                    <span>$ ></span>
-                    <input type="text" class="input-commands" autofocus>
-                </div>
-            </div>
-    </section>
         <section id="workspace0" class="workspaces">
                 <div class="top-bar">
                     <div class="title-bar">
@@ -62,9 +62,9 @@
                         <button class="run-code">Run</button>
                     </div>
                     <div class="manage-workspace">
-                        <button class="close" class="controlls"><img src="./assets/icons/tabcontrols/icons8-macos-close-30.png"></button>
-                        <button class="maximize" class="controlls"><img src="./assets/icons/tabcontrols/icons8-macos-maximize-30.png"></button>
-                        <button class="minimize" class="controlls"><img src="./assets/icons/tabcontrols/icons8-macos-minimize-30.png"></button>
+                        <button class="close" class="controls"><img src="./assets/icons/tabcontrols/icons8-macos-close-30.png"></button>
+                        <button class="maximize" class="controls"><img src="./assets/icons/tabcontrols/icons8-macos-maximize-30.png"></button>
+                        <button class="minimize" class="controls"><img src="./assets/icons/tabcontrols/icons8-macos-minimize-30.png"></button>
                         
                     </div>
                 </div>
@@ -79,6 +79,8 @@
         <p>A computer program is a collection of instructions to perform a specific task. For this, a computer program may need to store data, retrieve data, and perform computations on the data.</p>
             
         <p>A data structure is a named location that can be used to store and organize data. And, an algorithm is a collection of steps to solve a particular problem. Learning data structures and algorithms allow us to write efficient and optimized computer programs.</p>
+
+        
     </div>
 
     <div id="foot">

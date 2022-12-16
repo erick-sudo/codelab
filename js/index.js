@@ -50,6 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleMode(1)
     })
 
+    document.querySelector("#commands").style.height = (innerHeight * 0.8)+"px" 
+    console.log(document.querySelector("#commands").style.height)
 })
 
 document.querySelector("#cancel").addEventListener('click', event => {
@@ -67,7 +69,12 @@ function randomColor() {
 }
 function toggleMode(mode) {
     if(mode) {
-        document.querySelector("html").style.backgroundColor = "black"
+        document.querySelector("html").style.backgroundColor = "white"
+        document.querySelectorAll(".notes p").forEach(p => {
+            p.style.color = "black"
+        })
+
+        document.querySelector("#add-workspace").style.color = "black"
     
         document.querySelectorAll(".workspaces").forEach(space => {
             space.style.backgroundColor = "rgb(245, 231, 231)"
@@ -106,6 +113,12 @@ function toggleMode(mode) {
         })
     } else {
         document.querySelector("html").style.backgroundColor = "#0c0a0b"
+
+        document.querySelectorAll(".notes p").forEach(p => {
+            p.style.color = "white"
+        })
+
+        document.querySelector("#add-workspace").style.color = "white"
     
         document.querySelectorAll(".workspaces").forEach(space => {
             space.style.backgroundColor = "transparent"

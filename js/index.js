@@ -401,3 +401,14 @@ function toggleFile(event) {
 
     document.querySelector(`#textarea${event.target.id[9]}`).innerHTML = (Object.values(workspaces[activeSpaceId].files.find(file => Object.keys(file)[0] === event.target.id)))
 }
+
+function buildTree(element, indent) {
+    let parent = document.createElement("div")
+    for(let child of element.children) {
+        let node = document.createElement("div")
+        node.textContent = `NODE-${indent}`
+        node.classList.add(`node${indent}`)
+        node.style.marginLeft = `${indent}em`
+        parent.appendChild(node)
+    }
+}

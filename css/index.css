@@ -207,6 +207,7 @@ button{
 .heading{
     color: rgb(247, 206, 206);
     text-shadow: 0.05em 0.05em 0em rgb(7, 14, 1);
+    font-variant: small-caps;
 }
 textarea{
     font-size: 1.1em;

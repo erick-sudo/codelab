@@ -1,0 +1,76 @@
+html{
+    font-family: monospace;
+    background-color: #0c0a0b;
+}
+*{
+    box-sizing: border-box;
+    color: white;
+}
+
+#login{
+    border: solid 1px #695e62;
+    margin-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px;
+}
+form{
+    padding: 5px;
+}
+form > div {
+    margin-top: 1em;
+    width: 100%;
+}
+
+input[type="text"], input[type="password"] {
+    background-color: transparent;
+    outline: none;
+    width: 100%;
+    border: solid 1px #695e62;
+    text-align: center;
+    font-weight: bolder;
+    color: tomato;
+    padding: 0.6em;
+}
+
+input[type="submit"] {
+    display: block;
+    color: white;
+    background-color: rgba(255, 99, 71, 0.596);
+    margin: 0 auto;
+    padding: 5px;
+    width: 40%;
+    font-weight: bolder;
+    border: none;
+    border-radius: 5px;
+}
+#logo {
+    width: 2em;
+}
+
+#createacc {
+    text-decoration: none;
+    color: blue;
+}
+
+#createacc:hover {
+    text-decoration: underline;
+}
+
+@media screen and (orientation: landscape) {
+    #login{
+        width: 50%;
+        margin: 5em auto;
+    }
+}
+@media screen and (orientation: portrait) {
+    #login{
+        width: 100%;
+        margin: 5em auto;
+    }
+}

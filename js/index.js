@@ -18,6 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    let tree = document.getElementById("tree")
+
+    tree.appendChild(buildTree(document.body, 0))
+
     document.querySelector(".close").addEventListener('click', event => {
         event.target.closest("div").closest("div").closest("section").remove()
     })
@@ -406,13 +410,33 @@ function toggleFile(event) {
     document.querySelector(`#textarea${event.target.id[9]}`).innerHTML = (Object.values(workspaces[activeSpaceId].files.find(file => Object.keys(file)[0] === event.target.id)))
 }
 
-function buildTree(element, indent) {
-    let parent = document.createElement("div")
+
+//Building the DOM Tree nodes
+function buildTree(element, level) {
+    console.log("-".repeat(level)+element.tagName, level,"[", element.className, element.id, "]")
+    let parent = createDiv(element, level)
     for(let child of element.children) {
-        let node = document.createElement("div")
-        node.textContent = `NODE-${indent}`
-        node.classList.add(`node${indent}`)
-        node.style.marginLeft = `${indent}em`
-        parent.appendChild(node)
+        level+=1
+        if(child.children.length>0) {
+            parent.appendChild(buildTree(child, level))
+        } else {
+            console.log("-".repeat(level)+child.tagName, level,"[", child.className, level.id, "]")
+            parent.appendChild(createDiv(child, level))
+        }
+        level-=1
     }
+    level-=1
+
+    return parent
+}
+
+//Create Node Description
+function createDiv(element, level) {
+    let div = document.createElement("div")
+    div.classList.add(`level${level}`)
+    div.style.marginLeft = `${level*0.8}em`
+    div.style.backgroundColor = randomColor()
+    div.innerHTML = `${element.tagName} <b>Classes</b>=[${element.classList}] ${element.id ? "id = "+element.id : ""}`
+
+    return div
 }

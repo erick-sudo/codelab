@@ -307,3 +307,21 @@ body{
 .notes{
     text-align: justify;
 }
+
+
+/*The DOM Tree Styling*/
+#tree div {
+    border: solid 1px;
+    border-radius: 5px;
+    margin: 5px 10px;
+    padding: 1.2em;
+
+    width: max-content;
+}
+#tree{
+    margin: 0 auto;
+    width: max-content;
+    color: white;
+    font-family: monospace;
+    font-weight: bolder;
+}

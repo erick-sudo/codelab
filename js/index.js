@@ -18,9 +18,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    let tree = document.getElementById("tree")
+    //--------------------------------------------------------------------------------------------------------------------------------
 
-    tree.appendChild(buildTree(document.body, 0))
+    let thetree = document.getElementById("the-tree")
+    let html = document.querySelector("#innerhtml")
+    getInnerHtml(html)
+    thetree.appendChild(buildTree(getInnerHtml(html), 0))
+
+    html.addEventListener('input', e => {
+        thetree.appendChild(buildTree(getInnerHtml(html, e.target.value), 0))
+    })
 
     document.querySelector(".close").addEventListener('click', event => {
         event.target.closest("div").closest("div").closest("section").remove()
@@ -68,6 +75,23 @@ document.addEventListener('DOMContentLoaded', () => {
 document.querySelector("#cancel").addEventListener('click', event => {
     document.querySelector("#hidden-form").style.display = "none"
 })
+
+function getInnerHtml(target, html='<div id="box">\n<h1>Box Model</h1>\n<p>The Box model determines how elements are positioned within the browser window. With the Box Model, a developer can control the dimensions, margins, padding, and borders of an HTML element.</p>\n</div>') {
+
+    const tree = document.getElementById("the-tree")
+    tree.textContent = ""
+
+    target.value = html
+    let div = document.createElement("div")
+    div.innerHTML = target.value
+
+    //Validating html
+    if(div.innerHTML === html) {
+        tree.style.color = "white"
+        return div.firstChild
+    }
+    tree.style.color = "red"
+}
 
 function initTerminalDimensions(terminal){
     terminal.style.height = (innerHeight * 0.8)+"px"
@@ -413,6 +437,9 @@ function toggleFile(event) {
 
 //Building the DOM Tree nodes
 function buildTree(element, level) {
+    if(!Boolean(element)){
+        return document.createTextNode("Invalid HTML")
+    }
     console.log("-".repeat(level)+element.tagName, level,"[", element.className, element.id, "]")
     let parent = createDiv(element, level)
     for(let child of element.children) {
@@ -434,7 +461,6 @@ function buildTree(element, level) {
 function createDiv(element, level) {
     let div = document.createElement("div")
     div.classList.add(`level${level}`)
-    div.style.marginLeft = `${level*0.8}em`
     div.style.backgroundColor = randomColor()
     div.innerHTML = `${element.tagName} <b>Classes</b>=[${element.classList}] ${element.id ? "id = "+element.id : ""}`
 

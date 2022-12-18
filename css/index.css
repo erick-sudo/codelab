@@ -179,6 +179,12 @@ button{
     cursor: pointer;
 }
 
+#account {
+    background-color: transparent;
+    border: solid 1px #695e62;
+    border-radius: 10px;
+}
+
 .clicked-tab {
     background-color: rgb(247, 206, 206);
     color: black;

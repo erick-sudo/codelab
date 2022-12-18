@@ -54,7 +54,11 @@ hr{
     padding: 5px;
     color: white;
     font-weight: bolder;
-    border-radius: 0.5em;
+    border-radius: 5px;
+}
+#add-workspace:hover, button:hover{
+    background-color: #695e62;
+    color: white;
 }
 .commit{
     background-color: transparent;
@@ -182,7 +186,11 @@ button{
 #account {
     background-color: transparent;
     border: solid 1px #695e62;
-    border-radius: 10px;
+    border-radius: 5px;
+    transform: scale(0.8);
+}
+#account:hover {
+    background-color: #695e62;
 }
 
 .clicked-tab {

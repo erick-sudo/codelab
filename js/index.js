@@ -34,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
         term.scrollIntoView(true)
     })
 
+
+    //Handling clone repository submision request
     document.querySelector("#repo-form").addEventListener('submit', event => {
         event.preventDefault()
 
@@ -99,12 +101,12 @@ function terminalDragStartHandler(event) {
 function terminalDragOverHandler(event) {
     event.preventDefault()
 
-    console.log(event.target)
+    
 }
 
 function terminalDragDropHandler(event) {
     event.preventDefault()
-    console.log(event.target)
+    
     event.target.style.borderColor = "rgba(255, 0, 0, 0.507)"
 }
 
@@ -244,7 +246,7 @@ function populateWorkSpace(username, reponame) {
             console.log(data.message)
         }
         else{
-            document.querySelector(`#workspace${activeSpaceId} .top-bar .title-bar .heading`).textContent = reponame
+            document.querySelector(`#workspace${activeSpaceId} .top-bar .title-bar .heading`).innerHTML = `${reponame} <b style="color: green;">[${username}]</b>`
             let filesDiv = document.querySelector(`#workspace${activeSpaceId} .files`)
         
             let index = 0
@@ -387,6 +389,8 @@ function createWorkspace(workspaces){
     workspaces.push({id: workspaces.length, space: section, files : []})
 }
 
+
+// Toggling between files -----------------------------------------------------------
 function toggleFile(event) {
     //console.log(activeSpaceId, event.target.id)
     Array.from(event.target.closest("div").children).forEach(span => {

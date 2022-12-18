@@ -115,6 +115,7 @@ hr{
 
     white-space: nowrap;
     margin-bottom: 2px;
+    cursor: pointer;
     
 }
 .files::-webkit-scrollbar{

@@ -149,7 +149,7 @@ function hideTerminal(event) {
 }
 
 function randomColor() {
-    return `rgba(${(Math.random()*100)%255},${(Math.random()*100)%255},${(Math.random()*100)%255}, .5`
+    return `rgba(3,0,0,.9)` //`rgba(${(Math.random()*100)%255},${(Math.random()*100)%255},${(Math.random()*100)%255}, .5`
 }
 function toggleMode(mode) {
     if(mode) {

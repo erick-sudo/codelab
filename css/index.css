@@ -195,7 +195,7 @@ button{
 }
 
 .clicked-tab {
-    background-color: rgb(247, 206, 206);
+    background-color: orangered;
     color: black;
     box-shadow: 0.04em 0.04em 0.04em,
                 -0.04em -0.04em 0.04em;
@@ -206,14 +206,14 @@ button{
 }
 
 .heading{
-    color: rgb(247, 206, 206);
+    color: orangered;
     text-shadow: 0.05em 0.05em 0em rgb(7, 14, 1);
     font-variant: small-caps;
 }
 textarea{
     font-size: 1.1em;
     font-weight: bolder;
-    color: #f5aac6;
+    color: #f5b9aa;
 }
 
 body{
@@ -302,17 +302,18 @@ body{
     border-radius: 10px;
 }
 .notes h3 {
-    color: #e287b4;
+    color: rgb(243, 91, 35);
     
 }
 .notes{
     text-align: justify;
 }
 
+/* getInnerHtml(html) */
 
 /*The DOM Tree Styling*/
 #the-tree div {
-    border: solid 1px black;
+    border: solid 1px #ec50122a;
     border-radius: 5px;
     margin: 2% auto;
     padding: 0.5em;

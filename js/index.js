@@ -436,18 +436,18 @@ function toggleFile(event) {
 
 
 //Building the DOM Tree nodes
-function buildTree(element, level) {
+function buildTree(element, level, tree) {
     if(!Boolean(element)){
         return document.createTextNode("Invalid HTML")
     }
-    console.log("-".repeat(level)+element.tagName, level,"[", element.className, element.id, "]")
+    //console.log("-".repeat(level)+element.tagName, level,"[", element.className, element.id, "]")
     let parent = createDiv(element, level)
     for(let child of element.children) {
         level+=1
         if(child.children.length>0) {
             parent.appendChild(buildTree(child, level))
         } else {
-            console.log("-".repeat(level)+child.tagName, level,"[", child.className, level.id, "]")
+            //console.log("-".repeat(level)+child.tagName, level,"[", child.className, level.id, "]")
             parent.appendChild(createDiv(child, level))
         }
         level-=1

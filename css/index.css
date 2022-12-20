@@ -252,6 +252,7 @@ body{
     top: 5em;
     left: 2em;
     right: 2em;
+    z-index: 4;
 }
 #commands::-webkit-scrollbar{
     background-color: transparent;
@@ -323,8 +324,6 @@ body{
     margin-top: 2em;
     border-radius: 5px;
     padding: 5px;
-}
-#the-dom-tree{
     text-align: center;
 }
 #the-tree{
@@ -340,4 +339,15 @@ body{
 }
 b{
     color: orangered;
+}
+#toggle-node-diagram{
+    background-color: orangered;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5em;
+    cursor: pointer;
+    position: absolute;
+    right: 2em;
+    margin-top: 2em;
+    z-index: 1;
 }

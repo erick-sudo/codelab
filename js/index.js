@@ -22,11 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let thetree = document.getElementById("the-tree")
     let html = document.querySelector("#innerhtml")
+
     getInnerHtml(html)
     thetree.appendChild(buildTree(getInnerHtml(html), 0))
 
+    updateCode(html)
+
     html.addEventListener('input', e => {
         thetree.appendChild(buildTree(getInnerHtml(html, e.target.value), 0))
+        updateCode(e.target)
+        syncScroll(e.target);
     })
 
     document.querySelector(".clone").addEventListener('click', event => {
@@ -84,7 +89,7 @@ function getInnerHtml(target, html='<div id="box">\n<h1>Box Model</h1>\n<p>The B
     //Validating html
     if(div.innerHTML === html) {
         tree.style.color = "white"
-        return div.firstChild
+        return div
     }
     tree.style.color = "red"
 }
@@ -536,8 +541,9 @@ function buildTree(element, level, tree) {
     if(!Boolean(element)){
         return document.createTextNode("Invalid HTML")
     }
-    //console.log("-".repeat(level)+element.tagName, level,"[", element.className, element.id, "]")
+    
     let parent = createDiv(element, level)
+
     for(let child of element.children) {
         level+=1
         if(child.children.length>0) {
@@ -600,6 +606,7 @@ function updateCode(element, newText) {
     }).join("")
 
     code.innerHTML = text
+    //------------------------------------------------------------------------------------------------------------------
 
     //systeax Highlighting
     Prism.highlightElement(code);

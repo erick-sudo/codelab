@@ -115,7 +115,12 @@ let code = document.querySelector("#highlighting-content")
     </div>
     <div id="the-dom-tree">
         <h1>Drag an Element and See its Children</h1>
-        <textarea id="innerhtml" placeholder="Paste HTML Here" rows="10"></textarea>
+        <div class="code">
+            <pre class="highlighting" aria-hidden="true">
+<code class="language-html highlighting-content"></code>
+            </pre>
+        <textarea class="editing" id="innerhtml" placeholder="Paste HTML Here" onkeydown="checkTab(this, event)" onscroll="syncScroll(this)" spellcheck="false"></textarea>
+        </div>
         <div id="btn-holder"><button id="toggle-node-diagram">See The Tree</button></div>
         <div id="the-tree">
             here

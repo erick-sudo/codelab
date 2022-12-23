@@ -84,3 +84,7 @@ pre, code{
 .resizebtn:hover {
     cursor: se-resize;
 }
+
+#innerhtml {
+    border: solid 1px #695e62;
+}

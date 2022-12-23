@@ -153,16 +153,7 @@ hr{
     background-color: transparent;
 
 }
-#innerhtml{
-    margin: 0;
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    border-top: solid 1px #695e62;
-    padding: 1em;
-}
-
-#innerhtml::-webkit-scrollbar{
+/* #innerhtml::-webkit-scrollbar{
     width: 5px;
 }
 #innerhtml::-webkit-scrollbar-thumb{
@@ -172,12 +163,11 @@ hr{
 #innerhtml::-webkit-scrollbar-corner{
     background-color: transparent;
     border-radius: 5px;
-}
+} */
 
 
 #innerhtml:focus{
     outline: 0;
-    height: 100%;
 }
 #main{
     display: flex;
@@ -341,11 +331,6 @@ body{
     width: 100%;
     font-family: monospace;
     font-weight: bolder;
-}
-#innerhtml {
-    border: solid 1px #695e62;
-    width: 100%;
-    height: 150px;
 }
 b{
     color: orangered;

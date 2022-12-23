@@ -29,10 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         thetree.appendChild(buildTree(getInnerHtml(html, e.target.value), 0))
     })
 
-    document.querySelector(".close").addEventListener('click', event => {
-        event.target.closest("div").closest("div").closest("section").remove()
-    })
-
     document.querySelector(".clone").addEventListener('click', event => {
         activeSpaceId = update(event)
         
@@ -99,20 +95,54 @@ function initTerminalDimensions(terminal){
     terminal.closest("section").addEventListener("dragstart", terminalDragStartHandler)
 }
 
+//Maximize terminal call back
 function maximizeTerminal(event) {
-    let terminal = document.getElementById("terminal0")
-    terminal.style.left = 0
-    terminal.style.right = 0
-    terminal.style.top = "2px"
-    terminal.style.bottom = "2px"
+    let terminal = event.target.closest("section")//document.getElementById("terminal0")
+    terminal.style.left = "0.5em"
+    terminal.style.right = "0.5em"
+    terminal.style.top = "0.5em"
+    terminal.style.bottom = "0.5em"
 }
 
+//Minimize terminal call back
 function minimizeTerminal(event) {
-    let terminal = document.getElementById("terminal0")
+    let terminal = event.target.closest("section")//document.getElementById("terminal0")
     terminal.style.left = "10em"
     terminal.style.right = "10em"
-    terminal.style.top = "5em"
-    terminal.style.bottom = "5em"
+    terminal.style.top = "8em"
+    terminal.style.bottom = "8em"
+}
+
+//Maximize workspace call back
+function maximizeWindow(event) {
+    let terminal = event.target.closest("section")//document.getElementById("terminal0")
+    terminal.style.height = (innerHeight*0.97)+"px"
+    terminal.style.width = ((innerWidth*0.97)+"px")
+
+    let codeSection = document.querySelector(`#${terminal.id} :nth-child(1)`).nextElementSibling.nextElementSibling
+    let height_up = codeSection.previousElementSibling.offsetHeight + codeSection.previousElementSibling.previousElementSibling.offsetHeight
+    let height_Down = terminal.offsetHeight - height_up
+    
+    codeSection.style.height = height_Down+"px"
+    terminal.style.height = "max-content"
+}
+
+//Minimize workspace call back
+function minimizeWindow(event) {
+    let terminal = event.target.closest("section")//document.getElementById("terminal0")
+    terminal.style.height = (innerHeight*0.4)+"px"
+    terminal.style.width = ((innerWidth*0.4)+"px")
+
+    let codeSection = document.querySelector(`#${terminal.id} :nth-child(1)`).nextElementSibling.nextElementSibling
+    let height_up = codeSection.previousElementSibling.offsetHeight + codeSection.previousElementSibling.previousElementSibling.offsetHeight
+    let height_Down = terminal.offsetHeight - height_up
+    
+    codeSection.style.height = height_Down+"px"
+    terminal.style.height = "max-content"
+}
+
+const closeWindow = function(event) {
+    event.target.closest("div").closest("div").closest("section").remove()
 }
 
 function terminalDragStartHandler(event) {
@@ -271,7 +301,7 @@ function populateWorkSpace(username, reponame) {
     .then(response => response.json())
     .then(data => {
         if(data.message === "Not Found") {
-            console.log(data.message)
+            displayErrorMessage(data.message)
         }
         else{
             document.querySelector(`#workspace${activeSpaceId} .top-bar .title-bar .heading`).innerHTML = `${reponame} <b style="color: green;">[${username}]</b>`
@@ -295,9 +325,21 @@ function populateWorkSpace(username, reponame) {
         }
     })
     .catch(error => {
-        console.log(error.message)
+        displayErrorMessage(error)
     })
 
+}
+
+function displayErrorMessage(message) {
+    let errorDiv = document.querySelector("#error-wrapper")
+    let span = document.querySelector("#error-message span")
+    span.textContent = message
+
+    errorDiv.style.display = "block"
+
+    setTimeout(() => {
+        errorDiv.style.display = "none"
+    }, 2000)
 }
 
 function fetchData(url, activeSpaceId, index, span) {
@@ -373,9 +415,9 @@ function createWorkspace(workspaces){
     let maximize = document.createElement("button")
     let close = document.createElement("button")
 
-    close.addEventListener('click', event => {
-        event.target.closest("div").closest("div").closest("section").remove()
-    })
+    close.addEventListener('click', closeWindow)
+    maximize.addEventListener('click', maximizeWindow)
+    minimize.addEventListener('click', minimizeWindow)
 
     //Add each button to a class
     let buttons = [minimize, maximize, close]
@@ -409,7 +451,7 @@ function createWorkspace(workspaces){
     pre.setAttribute("aria-hidden","true")
     //Creating the code element
     let codeElement = document.createElement("code")
-    codeElement.classList.add("language-javascript", "language-py", "highlighting-content")
+    codeElement.classList.add("language-javascript", "highlighting-content")
     //Append the code element to the pre element
     pre.appendChild(codeElement)
     //Create a TextArea
@@ -464,7 +506,28 @@ function toggleFile(event) {
         }
     })
 
-    document.querySelector(`#textarea${event.target.id[9]}`).innerHTML = (Object.values(workspaces[activeSpaceId].files.find(file => Object.keys(file)[0] === event.target.id)))
+    let text = (Object.values(workspaces[activeSpaceId].files.find(file => Object.keys(file)[0] === event.target.id)))
+    let textarea = document.querySelector(`#textarea${event.target.id[9]}`)
+    textarea.innerHTML = text
+
+    //Toggle Language
+    if(event.target.textContent.endsWith(".html")) {
+        textarea.previousElementSibling.firstElementChild.classList.remove("language-javascript", "language-css", "language-markdown")
+        textarea.previousElementSibling.firstElementChild.classList.add("language-html")
+    }
+    else if(event.target.textContent.endsWith(".js")) {
+        textarea.previousElementSibling.firstElementChild.classList.remove("language-html", "language-css", "language-markdown")
+        textarea.previousElementSibling.firstElementChild.classList.add("language-javascript")
+    } else if(event.target.textContent.endsWith(".css")) {
+        textarea.previousElementSibling.firstElementChild.classList.remove("language-javascript", "language-html", "language-markdown")
+        textarea.previousElementSibling.firstElementChild.classList.add("language-css")
+    } else if(event.target.textContent.endsWith(".md")) {
+        textarea.previousElementSibling.firstElementChild.classList.remove("language-javascript", "language-css", "language-html")
+        textarea.previousElementSibling.firstElementChild.classList.add("language-markdown")
+    }
+    
+    //Updating the pre/code tags behind the text area
+    updateCode(textarea.previousElementSibling.firstElementChild, text[0])
 }
 
 
@@ -492,7 +555,7 @@ function buildTree(element, level, tree) {
 
 //Workspace resizing handler 
 function resizeWorkSpace(event) {
-    
+
 }
 
 //Create Node Description
@@ -521,6 +584,21 @@ function updateCode(element, newText) {
     }
 
     //Update code
+    //text.replace(new RegExp("&", "g"), "&").replace(new RegExp("<", "g"), "<")
+    text = text.split("").map(char => {
+        if(char === '<') {
+            return "&lt;"
+        }
+        else if(char === '&') {
+            return "&amp;"
+        }
+        else if(char === '>') {
+            return "&gt;"
+        } else {
+            return char
+        }
+    }).join("")
+
     code.innerHTML = text
 
     //systeax Highlighting

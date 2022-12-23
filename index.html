@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="./css/editor-dark.css">
 </head>
 <body>
-    
+    <div id="error-wrapper">
+        <div id="error-message"><span>Sorry an Error Occured !</span><img src="./assets/icons/error.png"></div>
+    </div>
     <section id="terminal0" class="terminals" draggable="true" >
         <div class="top-bar">
             <div class="title-bar">
@@ -69,9 +71,9 @@
                         <button class="run-code">Run</button>
                     </div>
                     <div class="manage-workspace">
-                        <button class="close" class="controls"><img src="./assets/icons/tabcontrols/icons8-macos-close-30.png"></button>
-                        <button class="maximize" class="controls"><img src="./assets/icons/tabcontrols/icons8-macos-maximize-30.png"></button>
-                        <button class="minimize" class="controls"><img src="./assets/icons/tabcontrols/icons8-macos-minimize-30.png"></button>
+                        <button class="close" onclick="closeWindow(event)" class="controls"><img src="./assets/icons/tabcontrols/icons8-macos-close-30.png"></button>
+                        <button class="maximize" onclick="maximizeWindow(event)" class="controls"><img src="./assets/icons/tabcontrols/icons8-macos-maximize-30.png"></button>
+                        <button class="minimize" onclick="minimizeWindow(event)" class="controls"><img src="./assets/icons/tabcontrols/icons8-macos-minimize-30.png"></button>
                         
                     </div>
                 </div>
@@ -79,7 +81,7 @@
                 </div>
                 <div class="code">
                     <pre class="highlighting" aria-hidden="true">
-<code class="language-javascript language-py highlighting-content"></code>
+<code class="language-javascript language-html language-py highlighting-content"></code>
                     </pre>
                     <textarea id="textarea0"  class="space editing" onkeydown="checkTab(this, event)" oninput="updateCode(this); syncScroll(this)" onscroll="syncScroll(this)" spellcheck="false">
 function updateCode(text) {

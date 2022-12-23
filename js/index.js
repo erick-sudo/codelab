@@ -400,17 +400,50 @@ function createWorkspace(workspaces){
     maximize.appendChild(maximizeIcon)
     close.appendChild(closeIcon)
 
+/*--------------------Create the code-wrapper-------------------------*/
+    let code = document.createElement("div")
+    code.classList.add("code")
+    //Creating a pre element
+    let pre = document.createElement("pre")
+    pre.classList.add("highlighting")
+    pre.setAttribute("aria-hidden","true")
+    //Creating the code element
+    let codeElement = document.createElement("code")
+    codeElement.classList.add("language-javascript", "language-py", "highlighting-content")
+    //Append the code element to the pre element
+    pre.appendChild(codeElement)
     //Create a TextArea
     let textarea = document.createElement("textarea")
-    textarea.cols = "60"
-    textarea.rows = "20"
-    textarea.classList.add("space")
-    textarea.autocomplete = "on"
+    textarea.classList.add("space", "editing")
+    textarea.setAttribute("spellcheck", "false")
     textarea.id = `textarea${workspaces.length}`
+    //Adding event Listeners to the textarea
+    textarea.addEventListener('keydown', event => {
+        checkTab(event.target, event)
+    })
+    textarea.addEventListener('input', (event) => {
+        updateCode(event.target)
+        syncScroll(event.target)
+    })
+    textarea.addEventListener('scroll', (event) => {
+        syncScroll(event.target)
+    })
+    //Wrapping the pre and the textarea in the div element
+    code.append(pre, textarea)
+
+    //Create the resize button
+    let resizeBtn = document.createElement("div")
+    resizeBtn.classList.add("resizebtn")
+    //Create resize icon
+    let resizeIcon = document.createElement('img')
+    resizeIcon.setAttribute("src", "../assets/icons/tabcontrols/resize-6-64.png")
+    resizeBtn.appendChild(resizeIcon)
+
+    resizeBtn.addEventListener('drag', resizeWorkSpace)
 
     manageworspace.append(close, maximize, minimize)
     topBar.append(titleBar, manageworspace)
-    section.append(topBar, files, textarea)
+    section.append(topBar, files, code, resizeBtn)
 
     document.querySelector("#main").appendChild(section)
     section.id = `workspace${workspaces.length}`
@@ -457,6 +490,11 @@ function buildTree(element, level, tree) {
     return parent
 }
 
+//Workspace resizing handler 
+function resizeWorkSpace(event) {
+    
+}
+
 //Create Node Description
 function createDiv(element, level) {
     let div = document.createElement("div")
@@ -465,4 +503,55 @@ function createDiv(element, level) {
     div.innerHTML = `${element.tagName} <b>Classes</b>=[${element.classList}] ${element.id ? "id = "+element.id : ""}`
 
     return div
+}
+
+function updateCode(element, newText) {
+    let code, text
+    if(newText) {
+        code = element
+        text = newText
+    } else {
+        code = element.previousElementSibling.firstElementChild
+        text = element.value
+    }
+
+    //Handling the final newlines
+    if(text[text.length-1] === '\n') { //Checking if the last character is a newline character
+        text+=" "
+    }
+
+    //Update code
+    code.innerHTML = text
+
+    //systeax Highlighting
+    Prism.highlightElement(code);
+}
+
+function syncScroll(editing) {
+    /* Scroll result to scroll coords of event - sync with textarea */
+    let highlighting = editing.previousElementSibling
+    // Get and set x and y
+    highlighting.scrollTop = editing.scrollTop;
+    highlighting.scrollLeft = editing.scrollLeft;
+}
+
+function checkTab(element, event) {
+    let code = element.value
+
+    if(event.key === "Tab") {
+        //Tab key has been pressed
+        event.preventDefault() //Preventing the normal behaviour
+
+        let beforeTab = code.slice(0, element.selectionStart) //This the text before the tab
+        let afterTab = code.slice(element.selectionEnd, element.value.length) //This is the text after the tab
+
+        let cursorPosition = element.selectionEnd +1 //Where the cursor moves after tab - moving gorwar by 1 character to after tab
+        element.value = beforeTab + "\t" + afterTab //Adding the tab character
+
+        //Moving the cursor
+        element.selectionStart = cursorPosition
+        element.selectionEnd = cursorPosition
+
+        updateCode(element.previousElementSibling.firstElementChild, element.value)  //Updating the text to inclide the indent
+    }
 }

@@ -3,10 +3,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab001</title>
+    <title>Lab</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/form.css">
+
+    <link rel="stylesheet" href="./prism/prism.css">
+    <link rel="stylesheet" href="./css/editor-dark.css">
 </head>
 <body>
     
@@ -43,7 +46,7 @@
         </div>
     </div>
     <div id="nav-bar">
-        <div><h1>Lab 001</h1></div>
+        <div><h1>Dense</h1></div>
         <div id="color-mode">
             <img id="dark-mode" src="./assets/icons/tabcontrols/sun-2-32.png">
             <img id="bright-mode" src="./assets/icons/tabcontrols/moon-32.png">
@@ -74,8 +77,39 @@
                 </div>
                 <div class="files">
                 </div>
-                <textarea id="textarea0" cols="60" rows="10" class="space" autocomplete></textarea>
+                <div class="code">
+                    <pre class="highlighting" aria-hidden="true">
+<code class="language-javascript language-py highlighting-content"></code>
+                    </pre>
+                    <textarea id="textarea0"  class="space editing" onkeydown="checkTab(this, event)" oninput="updateCode(this); syncScroll(this)" onscroll="syncScroll(this)" spellcheck="false">
+function updateCode(text) {
+let code = document.querySelector("#highlighting-content")
+                                
+    //Update code
+    code.innerText = text
+                                    
+    //systeax Highlighting
+    hljs.highlightAll();
+}</textarea>
+                </div>
+                <!-- <textarea id="textarea0" cols="60" rows="10" class="space" autocomplete></textarea> -->
+                <div class="resizebtn">
+                    <img src="./assets/icons/tabcontrols/resize-6-64.png">
+                </div>
         </section>
+        <!-- Automatically populate highlighting content from text area -->
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+              document.querySelectorAll(".highlighting-content").forEach(element => {
+                Prism.highlightElement(element);
+              })
+    
+              document.querySelectorAll(".space").forEach(element => {
+                console.log(element.previousElementSibling.firstElementChild.innerHTML)
+                element.previousElementSibling.firstElementChild.innerHTML = element.value
+              })
+            })
+         </script>
     </div>
     <div id="the-dom-tree">
         <h1>Drag an Element and See its Children</h1>
@@ -125,4 +159,5 @@ Maps (also known as Dictionaries) are data structures stores a collection of key
     </div>
 </body>
 <script src="./js/index.js"></script>
+<script src="./prism/prism.js"></script>
 </html>

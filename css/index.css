@@ -10,6 +10,7 @@ html{
     color: white;
 }
 .workspaces {
+    position: relative;
     background-color: transparent;
     min-width: 100px;
     height: max-content;
@@ -148,7 +149,7 @@ hr{
     background-color: transparent;
 
 }
-textarea{
+#innerhtml{
     margin: 0;
     padding: 0;
     border: none;
@@ -157,16 +158,20 @@ textarea{
     padding: 1em;
 }
 
-textarea::-webkit-scrollbar{
+#innerhtml::-webkit-scrollbar{
     width: 5px;
 }
-textarea::-webkit-scrollbar-thumb{
-    background-color: orangered;
+#innerhtml::-webkit-scrollbar-thumb{
+    background-color: rgb(63, 50, 50);
+    border-radius: 5px;
+}
+#innerhtml::-webkit-scrollbar-corner{
+    background-color: transparent;
     border-radius: 5px;
 }
 
 
-textarea:focus{
+#innerhtml:focus{
     outline: 0;
     height: 100%;
 }

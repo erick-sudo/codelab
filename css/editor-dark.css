@@ -1,0 +1,84 @@
+.code {
+    position: relative;
+    min-height: 250px;
+}
+
+pre, code{
+    margin: 0;
+}
+
+.editing::-webkit-scrollbar, .highlighting::-webkit-scrollbar {
+    background-color: transparent;
+    height: 5px;
+    width: 5px;
+}
+.editing::-webkit-scrollbar-thumb, .highlighting::-webkit-scrollbar-thumb {
+    background-color: rgb(63, 50, 50);
+    border-radius: 20px;
+}
+
+.editing::-webkit-scrollbar-corner, .highlighting::-webkit-scrollbar-corner  {
+    background-color: transparent;
+}
+
+.editing, .highlighting {
+    /* border: solid 1px rgb(61, 47, 47); */
+    
+    margin: 0 !important;
+    padding: 10px !important;
+    
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.editing, .highlighting, .highlighting * {
+    font-size: 12px !important;
+    font-family: monospace !important;
+    line-height: 20px !important;
+
+    tab-size: 4;
+}
+
+.highlighting {
+    background-color: transparent !important;
+    z-index: 0;
+}
+.editing{
+    z-index: 1;
+    outline: none !important;
+    background: transparent;
+    color: transparent;
+
+    resize: none;
+
+    caret-color: aqua;
+
+
+    border: none;
+    border-top: solid 1px #695e62;
+}
+
+.resizebtn {
+    width: 10px;
+    text-align: center;
+    height: 10px;
+    line-height: 20px;
+    position: absolute;
+    bottom: -0.7em;
+    right: -0.7em;
+    z-index: 2;
+}
+.resizebtn img {
+    width: 100%;
+}
+
+.resizebtn:hover {
+    cursor: se-resize;
+}

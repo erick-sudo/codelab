@@ -68,14 +68,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initTerminalDimensions(document.querySelector("#commands"))
 
-    document.body.addEventListener('drop', terminalDragDropHandler)
-    document.body.addEventListener('dropover', terminalDragOverHandler)
-    
+    // document.body.addEventListener('drop', terminalDragDropHandler)
+    // document.body.addEventListener('dropover', terminalDragOverHandler)
+
+
+    //Adding drag event listener to the resize button
+    let resizebtn = document.querySelector(".resizebtn")
+    resizebtn.addEventListener('dragstart', resizeDragStart)
+    resizebtn.addEventListener('drag', resizeDrag)
+    resizebtn.addEventListener('dragend', resizeDragEnd)
 })
 
 document.querySelector("#cancel").addEventListener('click', event => {
     document.querySelector("#hidden-form").style.display = "none"
 })
+
+//Dragstart handler to resize the workspace window
+function resizeDragStart(event) {
+    let workspace = event.target.parentElement.parentElement
+
+}
+
+function resizeDragEnd(event) {
+    // let workspace = event.target.parentElement.parentElement
+    // let boundingrect = workspace.getBoundingClientRect()
+    // let {top, left, right, bottom, width, height} = boundingrect
+    // let X = event.clientX,Y = event.clientY
+    
+    // //Check resize limit before resizing
+    // if(X-left > 300 || Y-top > 300) {
+    //     //Specifically alter the width if lower limit of 300px is not exceeded
+    //     if(X-left > 300) {
+    //         workspace.style.width = (X-left)+"px"
+    //     }
+        
+    //     //Specifically alter the height if lower limit of 300px is not exceeded
+    //     if(Y-top > 300) {
+    //         workspace.style.height = (Y-top)+"px"
+    //     }
+    // }
+}
+
+function resizeDrag(event) {
+    // console.log(event.target)
+    let workspace = event.target.parentElement.parentElement
+    let boundingrect = workspace.getBoundingClientRect()
+    let {top, left, right, bottom, width, height} = boundingrect
+    let X = event.clientX,Y = event.clientY
+    
+    //Check resize limit before resizing
+    if(X-left > 400 || Y-top > 400) {
+        //Specifically alter the width if lower limit of 300px is not exceeded
+        if(X-left > 400) {
+            workspace.style.width = (X-left)+"px"
+        }
+        
+        //Specifically alter the height if lower limit of 300px is not exceeded
+        if(Y-top > 400) {
+            workspace.style.height = (Y-top)+"px"
+        }
+
+        maximizeWindow(event, boundingrect)
+    }
+}
 
 function getInnerHtml(target, html='<div id="box">\n<h1>Box Model</h1>\n<p>The Box model determines how elements are positioned within the browser window. With the Box Model, a developer can control the dimensions, margins, padding, and borders of an HTML element.</p>\n</div>') {
 
@@ -119,10 +174,13 @@ function minimizeTerminal(event) {
 }
 
 //Maximize workspace call back
-function maximizeWindow(event) {
+function maximizeWindow(event, newdimensions) {
     let terminal = event.target.closest("section")//document.getElementById("terminal0")
-    terminal.style.height = (innerHeight*0.97)+"px"
-    terminal.style.width = ((innerWidth*0.97)+"px")
+    
+    if(!Boolean(newdimensions)) {
+        terminal.style.height = (innerHeight*0.97)+"px"
+        terminal.style.width = ((innerWidth*0.97)+"px")
+    }
 
     let codeSection = document.querySelector(`#${terminal.id} :nth-child(1)`).nextElementSibling.nextElementSibling
     let height_up = codeSection.previousElementSibling.offsetHeight + codeSection.previousElementSibling.previousElementSibling.offsetHeight
@@ -163,8 +221,6 @@ function terminalDragStartHandler(event) {
 
 function terminalDragOverHandler(event) {
     event.preventDefault()
-
-    
 }
 
 function terminalDragDropHandler(event) {
@@ -481,6 +537,10 @@ function createWorkspace(workspaces){
     //Create the resize button
     let resizeBtn = document.createElement("div")
     resizeBtn.classList.add("resizebtn")
+    //Adding the drag event listeners to the resize btn
+    resizeBtn.addEventListener('dragstart', resizeDragStart)
+    resizeBtn.addEventListener('drag', resizeDrag)
+    resizeBtn.addEventListener('dragend', resizeDragEnd)
     //Create resize icon
     let resizeIcon = document.createElement('img')
     resizeIcon.setAttribute("src", "../assets/icons/tabcontrols/resize-6-64.png")

@@ -2,7 +2,8 @@
     position: relative;
     min-height: 250px;
 
-    border-top: solid 1px #695e62;
+    /* border-top: solid 1px #695e62; */
+    flex-grow: 2;
 }
 .code-tree{
     border: solid 1px #695e62;
@@ -84,8 +85,4 @@ pre, code{
 
 .resizebtn:hover {
     cursor: se-resize;
-}
-
-#innerhtml {
-    /* border: solid 1px #695e62; */
 }

@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="./css/editor-dark.css">
 </head>
 <body>
+    <div class="cursor" id="outer">
+        <div class="cursor" id="middle">
+            <div class="cursor" id="inner"></div>
+        </div>
+    </div>
     <div id="error-wrapper">
         <div id="error-message"><span>Sorry an Error Occured !</span><img src="./assets/icons/error.png"></div>
     </div>
@@ -77,8 +82,11 @@
                         
                     </div>
                 </div>
+
+                <div class="left-sidebar_code-area">
                 <div class="files">
                 </div>
+                <div class="resizer" ondrag="expandOrContractSideBarDrag(event)" ondragend="expandOrContractSideBarDragEnd(event)" ondragstart="expandOrContractSideBarDragStart(event)" draggable="true"></div>
                 <div class="code">
                     <pre class="highlighting" aria-hidden="true">
 <code class="language-javascript language-html language-py highlighting-content"></code>
@@ -93,6 +101,7 @@ let code = document.querySelector("#highlighting-content")
     //systeax Highlighting
     hljs.highlightAll();
 }</textarea>
+                </div>
                 </div>
                 <!-- <textarea id="textarea0" cols="60" rows="10" class="space" autocomplete></textarea> -->
                 <div class="resizebtn" draggable="true">

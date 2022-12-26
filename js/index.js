@@ -13,6 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
     //     alert("Touch Ended")
     // })
 
+    document.addEventListener('mousemove', event => {
+        let x = event.pageX, y = event.pageY
+        let cursor = document.querySelector("#outer")
+        cursor.style.left = x-15
+        cursor.style.top = y-15
+
+
+    })
+
     let index = 0;
     Array.from(document.querySelectorAll(".workspaces")).forEach(workspace => {
         workspaces.push({id: workspaces.length, space: workspace, files: []})
@@ -188,29 +197,41 @@ function minimizeTerminal(event) {
 
 //Maximize workspace call back
 function maximizeWindow(event, newdimensions) {
-    let terminal = event.target.closest("section")//document.getElementById("terminal0")
+    event.preventDefault()
+    let terminal = event.target.closest("section") //Obtain the outer most section element
     
+    //Check if the function is invoked with a second argument
     if(!Boolean(newdimensions)) {
         terminal.style.height = (innerHeight*0.97)+"px"
         terminal.style.width = ((innerWidth*0.97)+"px")
     }
 
-    let codeSection = document.querySelector(`#${terminal.id} :nth-child(1)`).nextElementSibling.nextElementSibling
-    let height_up = codeSection.previousElementSibling.offsetHeight + codeSection.previousElementSibling.previousElementSibling.offsetHeight
+    //Get the pre/code element
+    let codeSection = document.querySelector(`#${terminal.id} :nth-child(1)`).nextElementSibling.lastElementChild
+    
+    //Height of the top bar
+    let height_up = codeSection.parentElement.previousElementSibling.offsetHeight
+    //Remaining height under topbar within the workspace
     let height_Down = terminal.offsetHeight - height_up
     
+    //Resetting the height of the pre element
     codeSection.style.height = height_Down+"px"
+    //Readjusting the section[.workspace] to expand to wrapp its content
     terminal.style.height = "max-content"
 }
 
 //Minimize workspace call back
 function minimizeWindow(event) {
-    let terminal = event.target.closest("section")//document.getElementById("terminal0")
-    terminal.style.height = (innerHeight*0.4)+"px"
-    terminal.style.width = ((innerWidth*0.4)+"px")
+    let terminal = event.target.closest("section")
+    terminal.style.height = "400px"
+    terminal.style.width = "400px"
 
-    let codeSection = document.querySelector(`#${terminal.id} :nth-child(1)`).nextElementSibling.nextElementSibling
-    let height_up = codeSection.previousElementSibling.offsetHeight + codeSection.previousElementSibling.previousElementSibling.offsetHeight
+    //Get the pre/code element
+    let codeSection = document.querySelector(`#${terminal.id} :nth-child(1)`).nextElementSibling.lastElementChild
+
+    //Height of the top bar
+    let height_up = codeSection.parentElement.previousElementSibling.offsetHeight
+    //Remaining height under topbar within the workspace
     let height_Down = terminal.offsetHeight - height_up
     
     codeSection.style.height = height_Down+"px"
@@ -561,13 +582,41 @@ function createWorkspace(workspaces){
 
     resizeBtn.addEventListener('drag', resizeWorkSpace)
 
+    //Create a div to wrap the files bar and the code div
+    let leftSidebar_codeArea = document.createElement("div")
+
+    //Create resizer
+    let resizer = document.createElement("div")
+    resizer.classList.add("resizer")
+    //Make resizer draggable
+    resizer.setAttribute("draggable", "true")
+    //Ading drag event listeners to the resizer
+    resizer.addEventListener("dragstart", expandOrContractSideBarDragStart)
+    resizer.addEventListener("drag", expandOrContractSideBarDrag)
+    resizer.addEventListener("dragend", expandOrContractSideBarDragEnd)
+
+    leftSidebar_codeArea.append(files,resizer, code)
+    leftSidebar_codeArea.classList.add("left-sidebar_code-area")
+
     manageworspace.append(close, maximize, minimize)
     topBar.append(titleBar, manageworspace)
-    section.append(topBar, files, code, resizeBtn)
+    section.append(topBar, leftSidebar_codeArea, resizeBtn)
 
     document.querySelector("#main").appendChild(section)
     section.id = `workspace${workspaces.length}`
     workspaces.push({id: workspaces.length, space: section, files : []})
+}
+
+function expandOrContractSideBarDragStart(event) {
+}
+function expandOrContractSideBarDrag(event) {
+    event.preventDefault()
+    
+    event.target.previousElementSibling.style.width = (event.clientX  - event.target.previousElementSibling.getBoundingClientRect().left)+"px"
+    
+}
+function expandOrContractSideBarDragEnd(event) {
+    event.preventDefault()
 }
 
 
@@ -681,7 +730,7 @@ function updateCode(element, newText) {
     code.innerHTML = text
     //------------------------------------------------------------------------------------------------------------------
 
-    //systeax Highlighting
+    //syntax Highlighting
     Prism.highlightElement(code);
 }
 

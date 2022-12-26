@@ -1,6 +1,11 @@
 .code {
     position: relative;
     min-height: 250px;
+
+    border-top: solid 1px #695e62;
+}
+.code-tree{
+    border: solid 1px #695e62;
 }
 
 pre, code{
@@ -22,7 +27,6 @@ pre, code{
 }
 
 .editing, .highlighting {
-    /* border: solid 1px rgb(61, 47, 47); */
     
     margin: 0 !important;
     padding: 10px !important;
@@ -62,9 +66,6 @@ pre, code{
 
 
     border: none;
-    border-top: solid 1px #695e62;
-
-
 }
 
 .resizebtn {
@@ -86,5 +87,5 @@ pre, code{
 }
 
 #innerhtml {
-    border: solid 1px #695e62;
+    /* border: solid 1px #695e62; */
 }

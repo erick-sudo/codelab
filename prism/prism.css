@@ -93,7 +93,8 @@ pre[class*="language-"] {
 .language-css .token.string,
 .style .token.string,
 .token.variable {
-	color: #f8f8f2;
+	color: #ee0505;
+	font-weight: bolder;
 }
 
 .token.atrule,

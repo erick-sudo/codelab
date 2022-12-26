@@ -2,6 +2,17 @@ let workspaces = []
 let activeSpaceId = 0
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // document.addEventListener('touchstart', event => {
+    //     alert("Touch Started")
+    // })
+    // document.addEventListener('touchmove', event => {
+    //     alert("Touch Moving")
+    // })
+    // document.addEventListener('touchend', event => {
+    //     alert("Touch Ended")
+    // })
+
     let index = 0;
     Array.from(document.querySelectorAll(".workspaces")).forEach(workspace => {
         workspaces.push({id: workspaces.length, space: workspace, files: []})
@@ -77,11 +88,13 @@ document.addEventListener('DOMContentLoaded', () => {
     resizebtn.addEventListener('dragstart', resizeDragStart)
     resizebtn.addEventListener('drag', resizeDrag)
     resizebtn.addEventListener('dragend', resizeDragEnd)
+    resizebtn.addEventListener('touchmove', resizeDrag)
 })
 
 document.querySelector("#cancel").addEventListener('click', event => {
     document.querySelector("#hidden-form").style.display = "none"
 })
+
 
 //Dragstart handler to resize the workspace window
 function resizeDragStart(event) {
@@ -110,7 +123,7 @@ function resizeDragEnd(event) {
 }
 
 function resizeDrag(event) {
-    // console.log(event.target)
+    event.preventDefault()
     let workspace = event.target.parentElement.parentElement
     let boundingrect = workspace.getBoundingClientRect()
     let {top, left, right, bottom, width, height} = boundingrect

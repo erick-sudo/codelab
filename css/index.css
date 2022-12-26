@@ -9,6 +9,11 @@ html{
     box-sizing: border-box;
     color: white;
 }
+#mainpage{
+    display: none;
+    transition: 3s;
+    opacity: 0;
+}
 .cursor{
     z-index: 0;
     height: 30px;

@@ -690,7 +690,7 @@ function resizeWorkSpace(event) {
 function createDiv(element, level) {
     let div = document.createElement("div")
     div.classList.add(`level${level}`)
-    div.style.backgroundColor = randomColor()
+    //div.style.backgroundColor = randomColor()
     div.innerHTML = `${element.tagName} <b>Classes</b>=[${element.classList}] ${element.id ? "id = "+element.id : ""}`
 
     return div

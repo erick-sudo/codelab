@@ -1,8 +1,10 @@
 #wait {
-    background-image: linear-gradient(45deg, orange, red) right center no-repeat;
-    background-size: cover;
+    background-image: url("../assets/background/eagle-159883.svg"), linear-gradient(45deg, #695e628a 0% 50%, #1d1819c0 50% 100%);
+    background-size: contain;
+    background-position: center 70%;
+    background-repeat: no-repeat;
     position: absolute;
-    left: 0;
+    left: 0; 
     right: 0;
     top: 0;
     bottom: 0;
@@ -77,10 +79,17 @@
     margin: 0 auto;
     border: solid 1px #695e62;
     border-radius: 50%;
+    background-color: #695e62;
 }
 #power img {
     vertical-align: middle;
 }
 #power:hover {
     box-shadow: 0.04em 0.04em 0.4em white;
+}
+.dots{
+    color: yellow;
+    font-weight: bolder;
+    vertical-align: bottom;
+    font-family: serif;
 }

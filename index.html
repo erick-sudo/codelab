@@ -110,7 +110,7 @@
                     <pre class="highlighting" aria-hidden="true">
 <code class="language-javascript language-html language-py highlighting-content"></code>
                     </pre>
-                    <textarea id="textarea0"  class="space editing" onkeydown="checkTab(this, event)" oninput="updateCode(this); syncScroll(this)" onscroll="syncScroll(this)" spellcheck="false">
+                    <textarea id="textarea0"  class="space editing" onkeydown="checkTab(this, event)" oninput="updateCode(this); syncScroll(this)" onscroll="syncScroll(this)" spellcheck="false" ondragover="fileDragOverHandler(event)" ondrop="fileDropHandler(event)">
 function updateCode(text) {
 let code = document.querySelector("#highlighting-content")
                                 

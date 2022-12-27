@@ -244,7 +244,7 @@ const closeWindow = function(event) {
 
 function terminalDragStartHandler(event) {
     event.preventDefault()
-    console.log(event.target)
+    // console.log(event.target)
 
     // let dragImage = new Image()
     // dragImage.src = '../assets/icons/tabcontrols/sun-2-32.png'
@@ -388,7 +388,7 @@ function createCommandSession() {
 }
 
 function populateWorkSpace(username, reponame) {
-    
+    console.log(username, reponame)
     let url  = `https://api.github.com/repos/${username}/${reponame}/contents`
     fetch(url, {
         "Accept": "application/vnd.github+json"
@@ -399,30 +399,62 @@ function populateWorkSpace(username, reponame) {
             displayErrorMessage(data.message)
         }
         else{
-            document.querySelector(`#workspace${activeSpaceId} .top-bar .title-bar .heading`).innerHTML = `${reponame} <b style="color: green;">[${username}]</b>`
-            let filesDiv = document.querySelector(`#workspace${activeSpaceId} .files`)
-        
-            let index = 0
-            for(let file of data) {
-                if(file.name[0] !== '.' && file.type === "file"){
-                    
-                    let span = document.createElement("span")
-                    span.classList.add("open-files")
-                    span.textContent = file.name
-                    span.addEventListener('click', toggleFile)
-                    
-                    filesDiv.appendChild(span)
-
-                    fetchData(file.git_url, activeSpaceId, index, span)
-                    index = index+1
-                }
-            }
+            populateFiles(data, activeSpaceId, {username: username, reponame: reponame})
         }
     })
     .catch(error => {
         displayErrorMessage(error)
     })
+}
 
+function populateFiles(data, spaceid, fromGIT) {
+    let filesDiv = document.querySelector(`#workspace${spaceid} .files`)
+        
+    let index = 0
+    if(fromGIT) {
+        document.querySelector(`#workspace${spaceid} .top-bar .title-bar .heading`).innerHTML = `${fromGIT.reponame} <b style="color: green;">[${fromGIT.username}]</b>`
+        for(let file of data) {
+            if(file.name[0] !== '.' && file.type === "file") {
+                const span = createSpan(file.name)             
+                filesDiv.appendChild(span)
+
+                fetchData(file.git_url, spaceid, index, span)
+
+                index = index+1
+            }
+        }
+    } else {
+        document.querySelector(`#workspace${spaceid} .top-bar .title-bar .heading`).innerHTML = `<b>Local</b>`
+        for(let file of data) {
+            const span = createSpan(file.name)
+            filesDiv.appendChild(span)
+
+            fetchData(file.git_url, spaceid, index, span)
+
+            readDataFromFileSystem(file, spaceid, index, span)
+
+            index = index+1
+        }
+    }
+
+    function createSpan(text) {
+        let span = document.createElement("span")
+        span.classList.add("open-files")
+        span.textContent = text
+        span.addEventListener('click', toggleFile)
+
+        return span
+    }
+}
+
+function readDataFromFileSystem(file, spaceid, index, span) {
+    file.text()
+    .then(text => {
+        let fileObject = {}
+        fileObject[`workspace${spaceid}_files_${index}`] = text
+        workspaces[spaceid].files[index] = fileObject
+        span.id = `workspace${spaceid}_files_${index}`
+    })
 }
 
 function displayErrorMessage(message) {
@@ -445,7 +477,6 @@ function fetchData(url, activeSpaceId, index, span) {
         fileObject[`workspace${activeSpaceId}_files_${index}`] = atob(data.content)
         workspaces[activeSpaceId].files[index] = fileObject
         span.id = `workspace${activeSpaceId}_files_${index}`
-
     })
 }
 
@@ -565,6 +596,8 @@ function createWorkspace(workspaces){
     textarea.addEventListener('scroll', (event) => {
         syncScroll(event.target)
     })
+    textarea.addEventListener('dragover', fileDragOverHandler)
+    textarea.addEventListener('drop', fileDropHandler)
     //Wrapping the pre and the textarea in the div element
     code.append(pre, textarea)
 
@@ -761,4 +794,37 @@ function checkTab(element, event) {
 
         updateCode(element.previousElementSibling.firstElementChild, element.value)  //Updating the text to inclide the indent
     }
+}
+
+function fileDropHandler(event) {
+    // Prevent default behavior (Prevent file from being opened)
+    event.preventDefault()
+    activeSpaceId = update(event)
+
+    if(event.dataTransfer.items) {
+        //If the browser supports DataTransferItemList interface
+        const droppedfiles = [...event.dataTransfer.items]
+        event.target.style.border = "none";
+        //Filtering out files only
+        const filesonly = droppedfiles.filter((item) => item.kind === 'file').map(file => file.getAsFile())
+        
+        populateFiles(filesonly, activeSpaceId)
+    } else {
+        //using the DataTransfer interface to access the file(s) if browser does not support DataTransferItemList interface
+        // [...event.dataTransfer.files].forEach((file, i) => {
+        //         console.log(`FILE[${i}] = ${file.name}`)
+        // })
+        event.target.style.border = "none"
+        const droppedfiles = [...event.dataTransfer.files]
+        populateFiles(droppedfiles, activeSpaceId)
+    }
+}
+
+function fileDragOverHandler(event )  {
+    event.preventDefault()
+    event.target.style.border = "dashed 3px #695e62"
+}
+
+function displayFileContent(element, content) {
+    
 }

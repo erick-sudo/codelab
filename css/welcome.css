@@ -8,7 +8,18 @@
     bottom: 0;
 
     z-index: 6;
-    transition: 3s;
+}
+.fade-in {
+    animation: fadein 1s ease-in-out;
+}
+@keyframes fadein {
+    from{
+        opacity: 0;
+        transform: rotateX(-90deg) scale(0.1);
+    }
+    to {
+        opacity: 1;
+    }
 }
 .wrapper {
     margin: 10em auto;

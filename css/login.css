@@ -41,8 +41,7 @@ input[type="text"], input[type="password"] {
 input[type="submit"] {
     display: block;
     color: white;
-    background-color: rgba(255, 99, 71, 0.596);
-    margin: 0 auto;
+    background-color: #695e62;    margin: 0 auto;
     padding: 5px;
     width: 40%;
     font-weight: bolder;

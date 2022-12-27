@@ -33,12 +33,9 @@ document.querySelector("#power").addEventListener('click', event => {
     clearInterval(interval)
 
     const mainpage = document.querySelector("#mainpage")
+    mainpage.classList.add("fade-in")
     mainpage.style.display = "block"
-    mainpage.style.opacity = 1
 
     const waitload = document.querySelector("#wait")
-    waitload.style.opacity = 0
-    setTimeout(() => {
-        waitload.style.display = "none"
-    },3000)
+    waitload.style.display = "none"
 })

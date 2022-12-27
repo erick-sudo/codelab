@@ -67,6 +67,19 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
 
+    function toggleElements(event) {
+        if(event.target.parentElement.lastElementChild === event.target) {
+            Array.from(event.target.parentElement.children).forEach(child => {
+                child.style.zIndex = "1"
+            })
+            event.target.parentElement.firstElementChild.style.zIndex = "2"
+        } else {
+            Array.from(event.target.parentElement.children).forEach(child => {
+                child.style.zIndex = "3"
+            })
+            event.target.nextElementSibling.style.zIndex = "2"
+        }
+    }
     //Handling clone repository submision request
     document.querySelector("#repo-form").addEventListener('submit', event => {
         event.preventDefault()

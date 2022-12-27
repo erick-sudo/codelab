@@ -75,11 +75,16 @@
     
 }
 #power {
-    width: 100px;
+    width: 90px;
     margin: 0 auto;
     border: solid 1px #695e62;
     border-radius: 50%;
     background-color: #695e62;
+}
+#power-wrapper{
+    position: absolute;
+    width: 100%;
+    bottom: 1em;
 }
 #power img {
     vertical-align: middle;

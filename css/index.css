@@ -78,10 +78,14 @@ hr{
     border-color: #695e62;
 }
 
-#nav-bar h1{
+#nav-bar div h1{
     color: rgba(19, 6, 6, 0.685);
     text-shadow: 0.04em 0.04em 0.04em white;
     text-align: center;
+}
+h1 b {
+    color: rgba(19, 6, 6, 0.685);
+    text-shadow: 0.04em 0.04em 0.04em rgba(231, 11, 11, 0.8);
 }
 #nav-bar div{
     
